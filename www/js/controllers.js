@@ -1,6 +1,6 @@
 angular.module('starter.controllers', ['ngOpenFB'])
 
-.controller('AppCtrl', function ($scope, $location, $interval, $ionicModal, $timeout, ngFB) {
+.controller('AppCtrl', function ($scope, $location, $interval, $ionicModal, $timeout, ngFB, $q) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -72,24 +72,28 @@ angular.module('starter.controllers', ['ngOpenFB'])
 
         ngFB.api({path: '/me/friends'})
         .then(function (response) {
-          // console.log('friends.....', response.data);
-          for ( var i = 0; i < response.data.length; i++ ) { 
-            var temp = response.data[i];
-            var friendId = response.data[i].id;
+          console.log('friends.....', response.data);
+
+          angular.forEach(response.data, function(friend) {
+            var deferred = $q.defer();
+            var temp = friend;
+            var friendId = friend.id;
             $scope.friendsPicturePath = '/' + friendId + '/picture';
             
             ngFB.api({
-              path: $scope.friendsPicturePath, 
+              path: $scope.friendsPicturePath,
               params: {redirect: false, height:50, width: 50}
             })
             .then(function (response) {
               temp.picture = response.data.url;
+              console.log(temp);
               $scope.friends.push(temp);
+              deferred.resolve(temp);
               // console.log('after adding picture.....', $scope.friends)
-            }, function (error){
-              console.log(error);
             });
-          }
+            //$scope.friends.push(deferred.promise);
+          });
+
           angular.extend($scope.fbData, response);
         }, function (error) {
           console.log(error);
@@ -235,7 +239,7 @@ angular.module('starter.controllers', ['ngOpenFB'])
       infowindow.open(map,marker);
     });
 
-    $scope.map = map;  
+    $scope.map = map;
   };
   //google.maps.event.addDomListener(window, 'load', initialize);
 
