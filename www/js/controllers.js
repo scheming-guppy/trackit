@@ -256,6 +256,7 @@ angular.module('starter.controllers', ['ngOpenFB', 'starter.factories'])
 .controller('EventsInfoCtrl', ['$scope','ngFB', '$location', 'eventInfo', function ($scope, ngFB, $location, eventInfo) {
   $scope.newEvent;
   $scope.newImages = [];
+  $scope.newNames = [];
   $scope.eventFunctions = {};
   $scope.eventFunctions.info = function () {
     $scope.newEvent = eventInfo.returnEvent();
@@ -267,13 +268,17 @@ angular.module('starter.controllers', ['ngOpenFB', 'starter.factories'])
       path: '/' + $scope.newEvent.friends[j].id + '/picture',
       params: {
           redirect: false,
-          height: 50,
-          width: 50
+          height: 60,
+          width: 60
       }
     }).then(function( res ) {
-      $scope.newImages.push(res);
+      $scope.newImages.push( { image: res } );
     if ($scope.newImages.length === $scope.newEvent.friends.length) {
         console.log($scope.newImages)
+        for ( var i = 0; i < $scope.newEvent.friends.length; i++ ) {
+          console.log($scope.newImages);
+          $scope.newImages[i].name = $scope.newEvent.friends[i].name;
+        }
       }
     })
     };
