@@ -173,7 +173,7 @@ angular.module('starter.controllers', ['ngOpenFB'])
   $scope.event = {};
   $scope.postEvent = function () {
     $scope.event.id = $scope.fbData.id;
-    $scope.event.name = $scope.fbData.name;
+    // $scope.event.name = $scope.fbData.name;
     $scope.event.friends = $scope.invitedFriendList;
     $scope.event.latitude = $scope.latitude;
     $scope.event.longitude = $scope.longitude;
