@@ -11,21 +11,18 @@
     </a>
   </div>
   <ion-content overflow-scroll="true">
-    <!--
+    
     <div class="bar bar-subheader item-input-inset">
       <label class="item-input-wrapper">
         <i class="icon ion-ios-search placeholder-icon"></i>
         <input type="search" ng-model="searchText" placeholder="Search">
       </label>
-        <ion-item href="#/app/events/createEvent">
-          <button class="button button-clear button-icon icon ion-plus"></button>
-        </ion-item>
     </div>
-    -->
+    
     <br>
     <br>
     <ion-list>
-      <ion-item ng-controller="EventsCtrl" collection-repeat="event in events" ng-click="getEventInfo(event)" href="#/app/events/eventsInfo" class="item-thumbnail-left">
+      <ion-item ng-controller="EventsCtrl" collection-repeat="event in events | filter:searchText" ng-click="getEventInfo(event)" href="#/app/events/eventsInfo" class="item-thumbnail-left">
       <!--<img ng-src="{{event.image}}" class="eventImage">-->
       <img ng-src="http://www.jukeboxpartyhire.com.au/wp-content/uploads/2013/08/stock1-png.png" class="eventImage">
       <div class="item item-divider eventHeader">
