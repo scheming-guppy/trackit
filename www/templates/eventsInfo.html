@@ -32,7 +32,7 @@
       <div class="item item-divider eventHeader">
         When:
       </div>
-      <div class="eventBody item-text-wrap"> {{ newEvent.date }} from {{ newEvent.startTime }} to {{ newEvent.endTime }}</div>
+      <div class="eventBody item-text-wrap"> {{ newEvent.date  | date:'EEEE, MMMM d'}} from {{ newEvent.startTime | date: 'shortTime'}} to {{ newEvent.endTime | date: 'shortTime' }}</div>
       <div class="item item-divider eventHeader">
         Who:
       </div>
