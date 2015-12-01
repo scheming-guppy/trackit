@@ -253,13 +253,33 @@ angular.module('starter.controllers', ['ngOpenFB', 'starter.factories'])
 
 }])
 
-.controller('EventsInfoCtrl', ['$scope', '$location', 'eventInfo', function ($scope, $location, eventInfo) {
+.controller('EventsInfoCtrl', ['$scope','ngFB', '$location', 'eventInfo', function ($scope, ngFB, $location, eventInfo) {
   $scope.newEvent;
+  $scope.newImages = [];
   $scope.eventFunctions = {};
   $scope.eventFunctions.info = function () {
     $scope.newEvent = eventInfo.returnEvent();
-  }
+    console.log("New event....",$scope.newEvent);
+  };
+  $scope.getFriendImages = function () {
+    for(var j = 0; j < $scope.newEvent.friends.length; j++) {
+      ngFB.api({
+      path: '/' + $scope.newEvent.friends[j].id + '/picture',
+      params: {
+          redirect: false,
+          height: 50,
+          width: 50
+      }
+    }).then(function( res ) {
+      $scope.newImages.push(res);
+    if ($scope.newImages.length === $scope.newEvent.friends.length) {
+        console.log($scope.newImages)
+      }
+    })
+    };
+}
   $scope.eventFunctions.info();
+  $scope.getFriendImages();
 }])
 
 .controller('MapController', function ($scope, $ionicLoading, $compile) {
