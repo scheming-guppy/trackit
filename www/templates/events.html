@@ -31,7 +31,10 @@
       <div class="item item-divider eventHeader">
         {{ event.name }}
       </div>
-      <div class="eventBody item-text-wrap"> {{ event.date }} from {{ event.startTime }} to {{ event.endTime }}</div>
+      <div class="eventBody item-text-wrap"> {{ event.date | date: 'EEEE, MMMM d'}} from {{ event.startTime | date: 'shortTime'}} to {{ event.endTime | date: 'shortTime'}}</div>
+      <a class="mapLink" ng-click="deleteEvent(event)" href="#/app/events">
+        <div class="eventMapButton">Delete Event</div>
+      </a>
       </ion-item>
     </ion-list>
     <!--
