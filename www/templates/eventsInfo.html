@@ -1,0 +1,41 @@
+<ion-view view-title="Plot">
+  <div id="eventInfo">
+    <div class="bar bar-subheader bar-calm">
+      <h1 class="title">{{ newEvent.name }}</h1>
+      <a href="#/app/events">
+        <i class="ion-arrow-left-a pageChangeLeft"></i>
+      </a>
+    </div>
+
+    <ion-content ng-controller="EventsInfoCtrl">
+    <br>
+    <br>
+      <!--<img src="{{ eventData.image }}" class="fullEventImage">-->
+      <img src="http://www.jukeboxpartyhire.com.au/wp-content/uploads/2013/08/stock1-png.png" class="fullEventImage">
+      <!--<ion-item ng-controller="MapController" ng-click='GetLocation(event)' href="#/app/events/map">
+          <button class="button button-clear" id="mapBtn" >Click to track location of friends</button>
+        </ion-item>-->
+      <a ng-controller="MapController" class="mapLink" ng-click="GetLocation(newEvent)" href="#/app/events/map">
+        <div class="eventMapButton">Map</div>
+      </a>
+      <div class="item item-divider eventHeader">
+        What:
+      </div>
+      <ion-item class="eventBody item-text-wrap">{{ newEvent.description }}</ion-item>
+      <div class="item item-divider eventHeader">
+        Where:
+      </div>
+      <div class="eventBody item-text-wrap">{{ newEvent.address }}</div>
+      <!--
+      <div class="eventBody item-text-wrap"> {{ eventData.address.Street }} <br> {{ eventData.address.city }}, {{ eventData.address.state }}, {{ eventData.address.zip }}</div>
+      -->
+      <div class="item item-divider eventHeader">
+        When:
+      </div>
+      <div class="eventBody item-text-wrap"> {{ newEvent.date }} from {{ newEvent.startTime }} to {{ newEvent.endTime }}</div>
+      <div class="item item-divider eventHeader">
+        Who:
+      </div>
+    </ion-content>
+  </div>
+</ion-view>

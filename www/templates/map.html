@@ -1,4 +1,14 @@
-<ion-view title="Map Overview">
+<ion-view title="Plot">
+  <div class="bar bar-subheader bar-calm">
+    <h1 class="title">Event Map</h1>
+    <!--<a href="#/events" class="ion-android-arrow-back">
+    </a>-->
+    <a href="#/app/events/eventsInfo">
+      <i class="ion-arrow-left-a pageChangeLeft"></i>
+    </a>
+  </div>
+  <br>
+  <br>
   <ion-content ng-controller="MapController" ng-init="initialize(37.7833, 122.4167)">
     <div id="map" data-tap-disabled="true"></div>
   </ion-content>

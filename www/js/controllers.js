@@ -1,4 +1,17 @@
-angular.module('starter.controllers', ['ngOpenFB'])
+angular.module('starter.controllers', ['ngOpenFB', 'starter.factories'])
+
+// .factory('EventsFactory', function ($http, $location, $window){
+//   var setEvent = function (input) {
+//     newEvent = input;
+//   };
+//   var returnEvent = function () {
+//     return newEvent;
+//   }
+//   return {
+//     setEvent: setEvent,
+//     returnEvent: returnEvent
+//   }
+// })
 
 .controller('AppCtrl', function ($scope, $location, $interval, $ionicModal, $timeout, ngFB, $q) {
 
@@ -173,7 +186,6 @@ angular.module('starter.controllers', ['ngOpenFB'])
   $scope.event = {};
   $scope.postEvent = function () {
     $scope.event.id = $scope.fbData.id;
-    // $scope.event.name = $scope.fbData.name;
     $scope.event.friends = $scope.invitedFriendList;
     $scope.event.latitude = $scope.latitude;
     $scope.event.longitude = $scope.longitude;
@@ -204,15 +216,51 @@ angular.module('starter.controllers', ['ngOpenFB'])
   };
 })
 
-.controller('EventsCtrl', function ($scope, $location) {
 
+
+.controller('EventsCtrl', ['$scope', '$location', 'eventInfo', function ($scope, $location, eventInfo) {
   $scope.events;
   socket.on('retrieveEvent', function (events) {
     // console.log('retrieve event through socket....', events);
     $scope.events = events;
+    console.log($scope.events);
   });
 
-})
+  // $scope.events = [
+  //   {
+  //     name: 'BDAY PARTY',
+  //     description: 'Seriously, a birthday party',
+  //     location: 'tatooine'
+  //   },
+  //   {
+  //     name: 'BDAY PARTY',
+  //     description: 'Seriously, a birthday party',
+  //     location: 'tatooine'
+  //   }
+  // ]
+  
+  $scope.getEventInfo = function (input) {
+    eventInfo.setEvent(input);
+    // $scope.newEvent = {
+    //   name: 'BDAY PARTY',
+    //   description: 'Seriously, a birthday party',
+    //   location: 'tatooine'
+    }
+  //   // console.log('input', input);
+  //   // console.log('newEvent', $scope.newEvent);
+  //   EventsFactory.setEvent(input);
+  // }
+
+}])
+
+.controller('EventsInfoCtrl', ['$scope', '$location', 'eventInfo', function ($scope, $location, eventInfo) {
+  $scope.newEvent;
+  $scope.eventFunctions = {};
+  $scope.eventFunctions.info = function () {
+    $scope.newEvent = eventInfo.returnEvent();
+  }
+  $scope.eventFunctions.info();
+}])
 
 .controller('MapController', function ($scope, $ionicLoading, $compile) {
   // console.log('inside mapcontroller....');
