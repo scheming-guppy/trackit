@@ -177,7 +177,7 @@ angular.module('starter.controllers', ['ngOpenFB'])
     $scope.event.friends = $scope.invitedFriendList;
     $scope.event.latitude = $scope.latitude;
     $scope.event.longitude = $scope.longitude;
-    // console.log($scope.event);
+    console.log('event data....', $scope.event);
     socket.emit('formData', $scope.event);
     socket.emit('getEvents', $scope.fbData.id);
     $location.path('/app/events');

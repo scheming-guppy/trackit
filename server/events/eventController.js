@@ -19,7 +19,6 @@ module.exports = {
   postEvent: function (info) {
 
     var id = info.id;
-    var name = info.name;
     var friends = info.friends;
     var description = info.description;
     var address = info.address;
@@ -36,7 +35,6 @@ module.exports = {
 
     var newEvent = new Event({
       id: id,
-      name: name,
       friends: friends,
       description: description,
       address: address,
