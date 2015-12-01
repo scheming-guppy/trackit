@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'ngOpenFB'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.factories', 'ngOpenFB'])
 
 .run(function ($ionicPlatform, ngFB) {
   ngFB.init({appId: '810263159095632'});
@@ -34,7 +34,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngOpenFB'])
     controller: 'AppCtrl'
   })
 
-    .state('app.home', {
+  .state('app.home', {
     url: '/home',
     views: {
       'menuContent': {
@@ -47,7 +47,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngOpenFB'])
     url: '/login',
     views: {
       'menuContent': {
-        templateUrl: 'templates/login.html'
+        templateUrl: 'templates/login.html',
+        controller: 'AppCtrl'
       }
     }
   })
@@ -86,6 +87,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngOpenFB'])
       }
     }
   })
+
+  .state('app.eventsInfo', {
+    url: '/events/eventsInfo',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/eventsInfo.html',
+        controller: 'EventsInfoCtrl'
+      }
+    }
+  })
+
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/home');
 });
