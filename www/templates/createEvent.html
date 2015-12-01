@@ -33,15 +33,17 @@
             <span class="input-label">End-Time</span>
             <input type="time" ng-model="event.endTime">
           </label>
+
+          <input type="text" ng-model="filters.name" placeholder="Search for a friend"/>
           
           <label class="item item-input">
             <span class="input-label">Friends</span>
             <ion-list>
-              <ion-item ng-repeat="friend in friends" ng-click="invitedFriends(friend)">
-          <label class="checkbox">
-            <input type="checkbox">
-          </label>
-              {{ friend.name }}
+              <ion-item ng-repeat="friend in friends | filter:filters" ng-click="invitedFriends(friend)">
+                <label class="checkbox">
+                  <input type="checkbox">
+                </label>
+                {{ friend.name }}
               </ion-item>
             </ion-list>
           </label>
