@@ -36,6 +36,11 @@
       <div class="item item-divider eventHeader">
         Who:
       </div>
+      <div class='list'>
+        <div class='item item-avatar' ng-repeat='image in newImages'>
+        <img src='{{image.image.data.url}}'>
+        <h2>{{ image.name }}</h2>
+      </div>
     </ion-content>
   </div>
 </ion-view>
